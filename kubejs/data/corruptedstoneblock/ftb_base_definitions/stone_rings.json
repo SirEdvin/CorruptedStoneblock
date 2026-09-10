@@ -1,0 +1,25 @@
+{
+  "id": "corruptedstoneblock:stone_rings",
+  "description": "Corrupted Stoneblock \u2014 a private underground world",
+  "author": "SirEdvin",
+  "dev_mode": false,
+  "display_order": 0,
+  "absolute_spawn": [
+    255,
+    64,
+    255
+  ],
+  "extents": {
+    "x": 1,
+    "z": 1
+  },
+  "construction": {
+    "structure_location": "corruptedstoneblock:starting_chamber",
+    "y_pos": 63,
+    "include_entities": false
+  },
+  "dimension": {
+    "private": true,
+    "dimension_type": "corruptedstoneblock:underground"
+  }
+}

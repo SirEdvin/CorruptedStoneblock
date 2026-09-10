@@ -1,0 +1,22 @@
+{
+    general: {
+        clear_player_inv_on_join: false
+        clear_player_inv_on_leave: false
+    }
+    lobby: {
+        lobby_dimension: "ftbteambases:lobby"
+        lobby_structure_location: "corruptedstoneblock:lobby"
+        lobby_y_pos: 63
+        lobby_game_mode: "adventure"
+    }
+    worldgen: {
+        chunk_generator: "custom"
+        single_biome_id: ""
+        copy_generator_from_dimension: "corruptedstoneblock:ring_template"
+        feature_gen: "never"
+        entities_in_start_structure: false
+    }
+    nether: {
+        allow_nether_portals: false
+    }
+}

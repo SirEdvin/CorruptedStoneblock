@@ -1,3 +1,6 @@
 .github/*
 serverpack/*
 README.md
+/mods/*.jar
+/scripts/**
+/docs/**

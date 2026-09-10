@@ -1,3 +1,6 @@
 
 *.exe
 *.zip
+/mods/*.jar
+__pycache__/
+*.pyc
