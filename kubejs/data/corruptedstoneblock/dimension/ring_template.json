@@ -1,0 +1,43 @@
+{
+  "type": "corruptedstoneblock:underground",
+  "generator": {
+    "type": "corruptedstoneblock:stone_rings",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "corruptedstoneblock:barren"
+    },
+    "center_x": 255,
+    "center_z": 255,
+    "min_y": -64,
+    "height": 384,
+    "rings": [
+      {
+        "width": 512,
+        "block": {
+          "Name": "minecraft:cobblestone"
+        }
+      },
+      {
+        "width": 512,
+        "block": {
+          "Name": "minecraft:stone"
+        }
+      },
+      {
+        "width": 1024,
+        "block": {
+          "Name": "minecraft:deepslate"
+        }
+      },
+      {
+        "width": 1024,
+        "block": {
+          "Name": "minecraft:obsidian"
+        }
+      }
+    ],
+    "outer_block": {
+      "Name": "minecraft:crying_obsidian"
+    }
+  }
+}

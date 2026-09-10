@@ -1,3 +1,6 @@
 .github/*
 serverpack/*
 README.md
+/worldgen/**
+/scripts/**
+/docs/**

@@ -1,3 +1,8 @@
 
 *.exe
 *.zip
+worldgen/.gradle/
+worldgen/build/
+worldgen/run/
+__pycache__/
+*.pyc
