@@ -45,18 +45,25 @@ def main():
         name = entry['file']
         assert name not in names, f'Duplicate index entry: {name}'
         names.add(name)
-        assert not name.startswith(('worldgen/', 'scripts/', 'docs/')), name
+        assert not name.startswith(('CorruptedStoneblockCore/', 'scripts/', 'docs/')), name
         assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == entry['hash'], name
     for path in data.rglob('*'):
         if path.is_file():
             assert str(path.relative_to(ROOT)) in names, f'Datapack file excluded: {path}'
-    jar = ROOT / 'mods/corrupted-stoneblock-worldgen-0.1.0.jar'
+    jar = ROOT / 'mods/CorruptedStoneblockCore-0.1.0.jar'
     assert str(jar.relative_to(ROOT)) in names
     with zipfile.ZipFile(jar) as archive:
         assert not any('/validation/' in n for n in archive.namelist()), 'Test harness shipped!'
-        assert 'site/siredvin/corruptedstoneblock/StoneRingGenerator.class' in archive.namelist()
+        assert 'site/siredvin/corruptedstoneblockcore/StoneRingGenerator.class' in archive.namelist()
         metadata = tomllib.loads(archive.read('META-INF/mods.toml').decode())
         assert metadata['mods'][0]['version'] == '0.1.0'
+        assert metadata['mods'][0]['modId'] == 'corruptedstoneblockcore'
+        assert metadata['mods'][0]['displayName'] == 'CorruptedStoneblockCore'
+        assert any(d['modId'] == 'gtceu' and d['mandatory'] for d in metadata['dependencies']['corruptedstoneblockcore'])
+        assert 'site/siredvin/corruptedstoneblockcore/CorruptedStoneblockGTAddon.class' in archive.namelist()
+    assert not list((ROOT / '.github/workflows').glob('*.yml')), 'Validation must be local only'
+    assert not list((ROOT / '.github/workflows').glob('*.yaml')), 'Validation must be local only'
+    assert not (ROOT / 'mods/corrupted-stoneblock-worldgen-0.1.0.jar').exists(), 'Obsolete generator JAR remains'
     print(f'PASS: ring data, private base, templates, production JAR, and {len(names)} indexed hashes')
 
 

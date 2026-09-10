@@ -1,8 +1,8 @@
 
 *.exe
 *.zip
-worldgen/.gradle/
-worldgen/build/
-worldgen/run/
+CorruptedStoneblockCore/.gradle/
+CorruptedStoneblockCore/build/
+CorruptedStoneblockCore/run/
 __pycache__/
 *.pyc

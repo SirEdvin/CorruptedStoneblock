@@ -36,7 +36,7 @@ integer-overflow bug.
 
 - **FTB Team Bases 20.1.3**: party/base creation, private dimensions, homes, lobby,
   and FTB membership lifecycle. Existing FTB Teams/Library/Chunks dependencies are retained.
-- **Corrupted Stoneblock Worldgen 0.1.0**: a small original Forge generator registered
+- **CorruptedStoneblockCore 0.1.0**: a GTCEu addon based on the official 1.20.1 addon template, with the generator registered
   as `corruptedstoneblock:stone_rings`. No FTB mixins and no unofficial StoneBlock fork.
 - **Skyblock Builder 1.20.1-5.1.33**: retained from the requested mod addition, but it
   does not own this pack's bases. Do not select its separate Skyblock world type
@@ -83,11 +83,25 @@ an ore to a vanilla biome or enabling server structures alone will not bypass th
 current no-decoration/no-structure generator. Keep ring-material changes in the JSON;
 no Java rebuild is needed to replace the placeholder cobblestone for future bases.
 
+## Core identity and template basis
+
+The source project is `CorruptedStoneblockCore/`, display/artifact name is
+`CorruptedStoneblockCore`, and the Forge mod ID is `corruptedstoneblockcore`.
+Its `@GTAddon` implementation registers with GTCEu and provides the core's
+`GTRegistrate`. The official addon template supplies ModDevGradle Legacy Forge,
+Parchment, property-expanded metadata, Gradle wrapper, and Spotless configuration.
+See the core README for pinned template provenance and GT8 adaptations.
+
+The **generator registry ID remains `corruptedstoneblock:stone_rings`**, intentionally:
+saved private dimensions refer to it. Renaming the owning mod does not rename the
+codec or datapack IDs. The local regression harness also verifies actual GTCEu
+addon discovery; old-core saved-world compatibility is checked separately.
+
 ## Rebuild and cheap checks
 
 ```sh
-cd worldgen
-./gradlew test build installPack
+cd CorruptedStoneblockCore
+./gradlew spotlessCheck test build installPack
 cd ..
 python3 scripts/generate-starting-structures.py
 packwiz refresh
@@ -98,7 +112,7 @@ git -c core.whitespace=cr-at-eol diff --check
 The repository includes the production JAR with its source so a normal Packwiz
 install works without local compilation. The source, Gradle files, scripts, docs,
 and test outputs are excluded from installed packs. Root-only exclusions are
-anchored: `/worldgen/**` must NOT accidentally exclude nested biome data.
+anchored: `/CorruptedStoneblockCore/**` must NOT accidentally exclude nested biome data.
 
 ## Dedicated-server regression procedure
 
@@ -109,10 +123,10 @@ served repository URL or the PR branch's raw `pack.toml`. Install Forge
 only if you agree to it. Bind the server to localhost for this test.
 
 ```sh
-cd worldgen
+cd CorruptedStoneblockCore
 ./gradlew reobfValidationJar
 cd ..
-cp worldgen/build/libs/corrupted-stoneblock-worldgen-0.1.0-validation.jar /path/to/disposable-server/mods/
+cp CorruptedStoneblockCore/build/libs/CorruptedStoneblockCore-0.1.0-validation.jar /path/to/disposable-server/mods/
 python3 scripts/run-worldgen-validation.py /path/to/disposable-server --mode fresh --java /path/to/java17/bin/java
 python3 scripts/run-worldgen-validation.py /path/to/disposable-server --mode restart --java /path/to/java17/bin/java
 ```
@@ -135,8 +149,9 @@ Checks include:
 
 Reports are `validation-fresh.json` and `validation-restart.json` in the disposable
 server directory. The runner refuses existing reports to avoid stale-pass mistakes.
-CI runs compilation, unit tests, and pack-data/hash checks; it does not run the
-full Minecraft server or a graphical client.
+All compilation, formatting, unit tests, pack-data/hash checks, exports, and Minecraft
+server tests run **locally only**. No GitHub Actions workflows are present, including
+the template's inherited build workflow. A graphical client test is still manual.
 
 The full-pack runs passed but were not log-error-free: YACL reports a missing
 mixin `minVersion`, ExtendedAE reports an `ex_emc_interface` loot-table parse
