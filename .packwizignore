@@ -1,6 +1,6 @@
 .github/*
 serverpack/*
 README.md
-/CorruptedStoneblockCore/**
+/mods/*.jar
 /scripts/**
 /docs/**

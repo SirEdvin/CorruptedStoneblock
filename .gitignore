@@ -1,8 +1,6 @@
 
 *.exe
 *.zip
-CorruptedStoneblockCore/.gradle/
-CorruptedStoneblockCore/build/
-CorruptedStoneblockCore/run/
+/mods/*.jar
 __pycache__/
 *.pyc

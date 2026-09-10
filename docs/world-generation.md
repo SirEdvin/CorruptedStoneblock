@@ -36,7 +36,7 @@ integer-overflow bug.
 
 - **FTB Team Bases 20.1.3**: party/base creation, private dimensions, homes, lobby,
   and FTB membership lifecycle. Existing FTB Teams/Library/Chunks dependencies are retained.
-- **CorruptedStoneblockCore 0.1.0**: a GTCEu addon based on the official 1.20.1 addon template, with the generator registered
+- **CorruptedStoneblockCore 0.0.1**: a GTCEu addon based on the official 1.20.1 addon template, with the generator registered
   as `corruptedstoneblock:stone_rings`. No FTB mixins and no unofficial StoneBlock fork.
 - **Skyblock Builder 1.20.1-5.1.33**: retained from the requested mod addition, but it
   does not own this pack's bases. Do not select its separate Skyblock world type
@@ -85,7 +85,8 @@ no Java rebuild is needed to replace the placeholder cobblestone for future base
 
 ## Core identity and template basis
 
-The source project is `CorruptedStoneblockCore/`, display/artifact name is
+The source project is maintained separately at
+https://github.com/SirEdvin/CorruptedStoneblockCore. Its display/artifact name is
 `CorruptedStoneblockCore`, and the Forge mod ID is `corruptedstoneblockcore`.
 Its `@GTAddon` implementation registers with GTCEu and provides the core's
 `GTRegistrate`. The official addon template supplies ModDevGradle Legacy Forge,
@@ -97,22 +98,38 @@ saved private dimensions refer to it. Renaming the owning mod does not rename th
 codec or datapack IDs. The local regression harness also verifies actual GTCEu
 addon discovery; old-core saved-world compatibility is checked separately.
 
-## Rebuild and cheap checks
+## Core release and cheap pack checks
+
+Core [release 0.0.1](https://github.com/SirEdvin/CorruptedStoneblockCore/releases/tag/0.0.1)
+is installed through `mods/corrupted-stoneblock-core.pw.toml`, using a fixed release
+asset URL and SHA-256. Neither the core source nor its production JAR is tracked
+in this pack's current tree. All Java sources, unit tests, the test-only mod, and
+its runner live in the separate core repository. Pack-owned JSON, templates,
+structure-generation script, and static pack checks stay here.
 
 ```sh
-cd CorruptedStoneblockCore
-./gradlew spotlessCheck test build installPack
-cd ..
+# In the CorruptedStoneblock pack repository:
 python3 scripts/generate-starting-structures.py
 packwiz refresh
-python3 scripts/check-worldgen.py
+python3 scripts/check-worldgen.py                   # offline pack/metadata checks
+python3 scripts/check-worldgen.py --download-core   # also verify the release JAR
+# Or: --core-jar /path/to/CorruptedStoneblockCore-0.0.1.jar
 git -c core.whitespace=cr-at-eol diff --check
 ```
 
-The repository includes the production JAR with its source so a normal Packwiz
-install works without local compilation. The source, Gradle files, scripts, docs,
-and test outputs are excluded from installed packs. Root-only exclusions are
-anchored: `/CorruptedStoneblockCore/**` must NOT accidentally exclude nested biome data.
+Core development occurs in a separate sibling checkout:
+
+```sh
+cd ../CorruptedStoneblockCore
+./gradlew spotlessCheck test build reobfValidationJar stageRelease
+```
+
+Publish new core versions as GitHub release assets before changing the Packwiz
+URL/hash; never overwrite a published version. Production artifacts are staged
+under `build/release/` in the core repository. `/mods/*.jar` is excluded from Git
+and Packwiz input. Metadata-referenced downloads are still installed normally;
+CurseForge export may include the externally hosted JAR in archive overrides.
+Root-anchored `/scripts/**` and `/docs/**` exclusions leave nested datapack data intact.
 
 ## Dedicated-server regression procedure
 
@@ -123,10 +140,9 @@ served repository URL or the PR branch's raw `pack.toml`. Install Forge
 only if you agree to it. Bind the server to localhost for this test.
 
 ```sh
-cd CorruptedStoneblockCore
+cd ../CorruptedStoneblockCore
 ./gradlew reobfValidationJar
-cd ..
-cp CorruptedStoneblockCore/build/libs/CorruptedStoneblockCore-0.1.0-validation.jar /path/to/disposable-server/mods/
+cp build/libs/CorruptedStoneblockCore-0.0.1-validation.jar /path/to/disposable-server/mods/
 python3 scripts/run-worldgen-validation.py /path/to/disposable-server --mode fresh --java /path/to/java17/bin/java
 python3 scripts/run-worldgen-validation.py /path/to/disposable-server --mode restart --java /path/to/java17/bin/java
 ```

@@ -573,10 +573,6 @@ file = "kubejs/startup_scripts/recipes/greenhouse.js"
 hash = "a80655d2879b34f1ae6e4d96fc88be9163f24369397a8ed2b2f2079b72f79c50"
 
 [[files]]
-file = "mods/CorruptedStoneblockCore-0.1.0.jar"
-hash = "f32bad1e99c70d2dc9485f8b8090d42913dbfcbed60ab744b1db3d553b5381e8"
-
-[[files]]
 file = "mods/ae2-crafting-tree.pw.toml"
 hash = "810f804314506f9cb248a13f41ae7ef1e50679bfd9dcb0888d50ae70da4a4181"
 metafile = true
@@ -669,6 +665,11 @@ metafile = true
 [[files]]
 file = "mods/controlling.pw.toml"
 hash = "cf8c5f2a139a2571d0d4b8be2b7463255cca721ae4a5741ec71595b7ab530e71"
+metafile = true
+
+[[files]]
+file = "mods/corrupted-stoneblock-core.pw.toml"
+hash = "b39b24ebec1a1eeae9e8cd3144bae8eed8a782531dfbbd25121bb131f24edad9"
 metafile = true
 
 [[files]]

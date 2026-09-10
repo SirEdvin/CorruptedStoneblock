@@ -1,29 +1,34 @@
 {
+  "validated_at_utc": "2026-09-10T18:03:21.074384+00:00",
   "validation_location": "local only; no GitHub workflows",
   "minecraft": "1.20.1",
   "forge": "47.4.10",
   "ftb_team_bases": "20.1.3",
   "core_name": "CorruptedStoneblockCore",
-  "core_version": "0.1.0",
+  "core_version": "0.0.1",
   "core_mod_id": "corruptedstoneblockcore",
+  "core_repository": "https://github.com/SirEdvin/CorruptedStoneblockCore",
+  "core_release": "https://github.com/SirEdvin/CorruptedStoneblockCore/releases/tag/0.0.1",
   "template_repository": "https://github.com/GregTechCEu/1.20.1-Addon-Template",
   "template_revision": "19cc9032b50b378033f95e1e8e0de1ab4e3bf062",
-  "core_jar_sha256": "f32bad1e99c70d2dc9485f8b8090d42913dbfcbed60ab744b1db3d553b5381e8",
+  "pack_base_commit": "772608e6385581c466302e17f126108a3d746e1c",
+  "core_jar_sha256": "bfd32c4dcc77c9b4e79dbce838ced1cd92d193c836e91ee1725b29cf29dba5a9",
   "junit": [
     {
       "name": "site.siredvin.corruptedstoneblockcore.RingLayoutTest",
       "tests": "4",
       "skipped": "0",
       "failures": "0",
-      "errors": "0"
+      "errors": "0",
+      "timestamp": "2026-09-10T17:57:38"
     }
   ],
   "dedicated_server": {
     "fresh": {
       "gtceu_addon_registered": true,
       "dimensions": [
-        "ftbteambases:private_for_csb_test_a_20260910_162609",
-        "ftbteambases:private_for_csb_test_b_20260910_162609"
+        "ftbteambases:private_for_csb_test_a_20260910_180015",
+        "ftbteambases:private_for_csb_test_b_20260910_180015"
       ],
       "two_party_teams": true,
       "safe_spawns": true,
@@ -38,6 +43,22 @@
     "restart": {
       "gtceu_addon_registered": true,
       "dimensions": [
+        "ftbteambases:private_for_csb_test_a_20260910_180015",
+        "ftbteambases:private_for_csb_test_b_20260910_180015"
+      ],
+      "two_party_teams": true,
+      "safe_spawns": true,
+      "isolation_and_persistence": true,
+      "real_boundary_samples": 53,
+      "codec_round_trip": true,
+      "terrain_blocks_scanned": 491520,
+      "lobby_portal_blocks": 3,
+      "restart": true,
+      "passed": true
+    },
+    "version-migration": {
+      "gtceu_addon_registered": true,
+      "dimensions": [
         "ftbteambases:private_for_csb_test_a_20260910_162609",
         "ftbteambases:private_for_csb_test_b_20260910_162609"
       ],
@@ -50,28 +71,18 @@
       "lobby_portal_blocks": 3,
       "restart": true,
       "passed": true
-    },
-    "core-upgrade": {
-      "gtceu_addon_registered": true,
-      "dimensions": [
-        "ftbteambases:private_for_csb_test_a_20260910_151738",
-        "ftbteambases:private_for_csb_test_b_20260910_151739"
-      ],
-      "two_party_teams": true,
-      "safe_spawns": true,
-      "isolation_and_persistence": true,
-      "real_boundary_samples": 53,
-      "codec_round_trip": true,
-      "terrain_blocks_scanned": 491520,
-      "lobby_portal_blocks": 3,
-      "restart": true,
-      "passed": true
     }
   },
+  "version_migration_from": "0.1.0",
   "client_gui_and_real_account_networking_tested": false,
   "nonfatal_full_pack_diagnostics": [
     "Couldn't parse element loot_tables:expatternprovider:blocks/ex_emc_interface",
-    "Mixin config yacl.mixins.json does not specify \"minVersion\" property"
+    "Mixin config yacl.mixins.json does not specify \"minVersion\" property",
+    "invalid dist DEDICATED_SERVER"
   ],
-  "local_export_verified": true
+  "local_export_verified": true,
+  "release_download_sha256_verified": true,
+  "packwiz_release_install_verified": true,
+  "packwiz_index_entries": 232,
+  "second_packwiz_refresh_unchanged": true
 }

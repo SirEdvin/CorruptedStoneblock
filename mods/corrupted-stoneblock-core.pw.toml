@@ -1,0 +1,8 @@
+name = "CorruptedStoneblockCore"
+filename = "CorruptedStoneblockCore-0.0.1.jar"
+side = "both"
+
+[download]
+url = "https://github.com/SirEdvin/CorruptedStoneblockCore/releases/download/0.0.1/CorruptedStoneblockCore-0.0.1.jar"
+hash-format = "sha256"
+hash = "bfd32c4dcc77c9b4e79dbce838ced1cd92d193c836e91ee1725b29cf29dba5a9"
